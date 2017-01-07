@@ -1,0 +1,206 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+  <title>Lottereo - Blockhain-powered Lottery</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+<body>
+  <div id="index-banner" class="parallax-container">
+    <div class="section no-pad-bot">
+      <div class="container">
+        <br><br>
+        <h1 class="header center teal-text text-lighten-2">Lottereo</h1>
+        <div class="row center">
+          <h5 class="header col s12 light">A descentralized lottery powered by the Ethereum Blockchain</h5>
+        </div>
+        <div class="row center">
+          <a href="Javascript:reveal()" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">Play!</a>
+        </div>
+        <br><br>
+      </div>
+    </div>
+    <div class="parallax"><img src="cat3.jpg" alt="Unsplashed background img 1"></div>
+  </div>
+
+  <div id="play" class="container hide">
+    <div class="section">
+      <div id="livecontainer" class="container">
+        <div class="row">
+          <div class="col s12 m6 l6">
+            <div class="card blue-grey darken-1">
+              <div class="card-content white-text">
+                <span class="card-title">Draw Information</span>
+                <div id='not-drawn'>
+                  <p>Draw Pot so far: <span id="total" style="font-weight:bold">0</span> ETH </p>
+                  <p>Number of Tickets sold so far: <span id ="numTickets">0</span> </p>
+                  <p>Price of each ticket (entry fee): <span id ="entryFee">0</span> ETH </p>
+                  <p>Draw Date - Draw will take place no earlier than: <span id = "drawDate"> </span></p>
+                  <p>Draw Contract on <a href="https://etherscan.io" id="etherscan1" target ="_blank">Etherscan:</a></p>
+                </div>
+                <div id="is-drawn">
+                  <p>Drawn on: <span id ="actualDrawDate"></span> </p>
+                  <p>Number of Tickets sold: <span id ="numTickets2">0</span> </p>
+                  <p>Winning Number: <span id ="winning-number"> 0 </span> </p>
+                  <p>Winning Wallets: <span id ="winning-wallets"> 0 </span> </p>
+                  <p>Draw Contract on <a href="https://etherscan.io" id="etherscan1" target="_blank">Etherscan:</a></p>
+                </div>   
+              </div>
+            </div>
+          </div>
+          <div class="col s12 m6 l6">
+            <div id="buy-form">
+              <h4>Buy Ticket</h4>
+              <p>Enter a number between 1 and 1,000 below</p>
+              <div class="input-field">
+                <input id="guess" placeholder="Guess a number between 1 and 1000" value="" type="number">
+                <a class="waves-effect waves-light btn" id="buybutton" href="Javascript:buyTicket()">Buy Ticket</a>
+              </div>
+              <div id="progress" class="progress hide">
+                <div class="indeterminate"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col s12 m4 l3" id="nav-previous">
+            <a class="waves-effect waves-light btn" id="previous-btn" href="#">Previous Draw</a>
+          </div>
+          <div clas="col s12 m4 l3" id="nav-next">
+            <a class="waves-effect waves-light btn" id="next-btn" href="#">Next Draw</a>
+          </div>
+        </div>
+      </div>
+
+      <div id="deadcontainer" class="container hide">
+        <p>To use Lottero you need either:</p>
+        <ul>
+          <li><a href="https://github.com/ethereum/mist">The Mist Browser</a> or </li>
+          <li><a href="https://metamask.io/">The MetaMask plugin for Chrome</a></li>
+        </ul>
+      </div>
+    </div> 
+  </div>
+
+  <div class="container">
+    <div class="section">
+
+      <!--   Icon Section   -->
+      <div class="row">
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center brown-text"><i class="material-icons">flash_on</i></h2>
+            <h5 class="center">What is Lottereo?</h5>
+
+            <p class="light">Lottereo is a lottery built on the Ethereum Blockchain. You can buy a ticket for 0.1 ETHER, which gives you the right to guess a number between 1 and 1,000. All the money paid is added to the pot for the draw. At the date and time specified, a number between 1 and 1,000 is randomly selected. The pot (minus a 10% administration fee on all tickets sold) is divided between the winners and they are immediately paid into the wallet they used to purchase the ticket. If there are no winners, the pot is “rolled over” into the next draw.</p>
+          </div>
+        </div>
+
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center brown-text"><i class="material-icons">group</i></h2>
+            <h5 class="center">How can I play?</h5>
+
+            <p class="light">You first need to have some Ether, which you can purchase at an exchange like <a href="https://www.kraken.com/">Kraken</a>. At the moment, because of the need to securely "sign" a transaction without revealing your wallet private keys, you also need either a <a href="https://github.com/ethereum/mist">special browser</a> or a <a href="https://metamask.io/">Chrome plugin</a> to interact with Lottereo. But once you have those two things (the money and the special browser), it’s easy! Just press Play above and off you go!
+</p>
+          </div>
+        </div>
+
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center brown-text"><i class="material-icons">settings</i></h2>
+            <h5 class="center">Why should I trust it?</h5>
+
+            <p class="light">Well, the code is publicly available <a href="https://github.com/glynnbird/lottereum">here</a>, so you can see exactly how it works. 
+We have blogged about how it works <a href="http://remebit.com/an-ethereum-project-3-a-draw/">here </a> and <a href="http://remebit.com/an-ethereum-project-4-the-lottery-orchestrator/">here</a>, as well as about how to ensure a truly random number is selected <a href="http://remebit.com/an-ethereum-project-5-randomness/"> here</a>; and about the difficulties of keeping the process going from draw to draw <a href="http://remebit.com/an-ethereum-project-6-automating-the-draws/">here </a> (hint: this is the only bit of the Lottery in which you need to trust us).</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="parallax-container valign-wrapper">
+    <div class="section no-pad-bot">
+      <div class="container">
+        <div class="row center">
+          <h5 class="header col s12 light">What is special about this Blockchain Lottery?</h5>
+        </div>
+      </div>
+    </div>
+    <div class="parallax"><img src="cat2.jpg" alt="Unsplashed background img 2"></div>
+  </div>
+
+  <div class="container">
+    <div class="section">
+
+      <div class="row">
+        <div class="col s12 center">
+          <h3><i class="mdi-content-send brown-text">In a word, <strong>trust</strong></i></h3>
+          <h4></h4>
+          <p class="left-align light">In the brick-and-mortar world, a lottery draw is an event where three things need to happen:</p>
+          <p class="left-align light">Players need to buy tickets and <strong>trust</strong> that these are entered in the draw.</p>
+          <p class="left-align light">A draw needs to take place where numbers are selected in a <strong>trusted</strong> random.</p>
+          <p class="left-align light">Everyone needs to <strong>trust</strong>strong> that the winner(s) are paid a portion of the pot in a fair way.</p>
+          <p class="left-align light">Now, up until now the trust factors have been held by a third party, e.g. the National Lottery. Everyone trusts them to sell the tickets, draw numbers transparently and pay the winners.</p>
+          <p class="left-align light">But using Ethereum we can replace all the third party trust:</p>
+          <p class="left-align light"><strong>Buying tickets</strong>. Because you pay with your wallet into a contract in the Ethereum blockchain, you know exactly where the money went (and can check it) and we know where the money came from (in case we need to pay out).</p>
+          <p class="left-align light"><strong>Doing the draw</strong>. The code for the draw is public and auditable. You can decide whether you trust it or not.</p>
+          <p class="left-align light"><strong>Paying the winner(s)</strong>. Again, this is in the code for the draw. If the code runs and a winner or winner exists, they will get paid (if you trust the code).</p>
+          <p class="left-align light">All of this is:</p>
+          <p class="left-align light"><strong>Anonymous</strong> (or pseudonymous). You play with your Ether wallet address. You get paid to your Ether wallet address.  No need to register.</p>
+           <p class="left-align light"><strong>Totally transparent</strong> and auditable. For every draw, all the data is there in the blockchain, so anyone can go and figure out if it was done correctly.</p>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="parallax-container valign-wrapper">
+    <div class="section no-pad-bot">
+      <div class="container">
+        <div class="row center">
+          <h5 class="header col s12 light"></h5>
+        </div>
+      </div>
+    </div>
+    <div class="parallax"><img src="cat1.jpg" alt="Unsplashed background img 3"></div>
+  </div>
+
+  <footer class="page-footer teal">
+    <div class="container">
+      <div class="row">
+        <div class="col l12 s12">
+          <h5 class="white-text">Who are you?</h5>
+          <p class="grey-text text-lighten-4">We are two product developers who think this technology is super cool and wanted to have a go at building a product that would allow us to learn more about it. You can contact us via <a href="https://twitter.com/glynn_bird" taget="_blank">here</a> & <a href="https://twitter.com/desktopdan" target="_blank">here</a>.</p>
+
+
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+      Made by <a class="brown-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+      </div>
+    </div>
+  </footer>
+
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+  <script src="js/init.js"></script>
+  <script src="js/lottereo.js"></script>
+  </body>
+</html>
+
